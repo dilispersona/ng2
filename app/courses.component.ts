@@ -2,34 +2,43 @@
 
 import { Component } from 'angular2/core';
 import { CourseService } from './courses.service';
-import { AuthorService } from './authors.service';
+import { AutoGrowDirective } from './auto-grow.directive';
 
 @Component({
     selector: 'courses',
     template: `
         <h2>Courses</h2>
-        {{title}}
+        {{title}}<br/>
+        <input type="text" autoGrow  [(ngModel)]="title"/>
         <ul>
             <li *ngFor="#course of courses">
                 {{course}}
             </li>
-        </ul>
-        <h2>Authors</h2>
-        <ul>
-            <li *ngFor="#author of authors">
-                {{ author }}
-            </li>
-        </ul>
+        </ul>  
+        <div (click)="onDivClick($event)">
+            <button class="btn btn-primary" [style.color]="isActive ? 'white' : 'gray'" (click)="onClick($event)">Submit</button>     
+        </div>
         `,
-    providers: [CourseService,AuthorService]
+    providers: [CourseService],
+    directives: [AutoGrowDirective]
 })
 
 export class CoursesComponent {
-    title = "title for the courses goes here";
+    title = "title for ";
     courses;
-    authors;
-    constructor(courseService: CourseService, authorService: AuthorService){
+    isActive = true;
+
+    onClick($event){
+        console.log($event);
+       // $event.stopPropagation();
+    }
+
+    onDivClick($event) {        
+        console.log($event.target.parentElement);
+    }
+   
+    constructor(courseService: CourseService){
         this.courses = courseService.getCourses();
-        this.authors = authorService.getAuthors();
+       // this.authors = authorService.getAuthors();
     }
 }
