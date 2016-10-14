@@ -38,7 +38,8 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 StarComponent = __decorate([
                     core_1.Component({
                         selector: 'star',
-                        template: "<i class=\"glyphicon\"\n                    [class.glyphicon-star-empty]=\"!isFavourite\"\n                    [class.glyphicon-star]=\"isFavourite\"\n                    (click)=\"onStarClick($event)\" [style.cursor]=\"'pointer'\">\n                </i>"
+                        template: "<i class=\"glyphicon\"\n                    [class.glyphicon-star-empty]=\"!isFavourite\"\n                    [class.glyphicon-star]=\"isFavourite\"\n                    (click)=\"onStarClick($event)\" [style.cursor]=\"'pointer'\">\n                </i>",
+                        styles: ["\n        .glyphicon-star {\n            color: orange;\n        }\n    "]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], StarComponent);

@@ -7,7 +7,12 @@ import { Component, Input, EventEmitter, Output } from 'angular2/core';
                     [class.glyphicon-star-empty]="!isFavourite"
                     [class.glyphicon-star]="isFavourite"
                     (click)="onStarClick($event)" [style.cursor]="'pointer'">
-                </i>`
+                </i>`,
+    styles: [`
+        .glyphicon-star {
+            color: orange;
+        }
+    `]
 })
 export class StarComponent {
 
