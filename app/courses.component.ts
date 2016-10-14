@@ -4,11 +4,14 @@ import { Component } from 'angular2/core';
 import { CourseService } from './courses.service';
 import { AutoGrowDirective } from './auto-grow.directive';
 import { StarComponent } from './star.component';
+import { LikeComponent } from './like.component';
+import { VoterComponent } from './voter.component';
+
 
 @Component({
     selector: 'courses',
     template: `
-        <h2>Courses</h2>
+        <h2>Courses</h2> 
         {{title}}<br/>
         <star [isFavourite]="post.isFavourite" (change)="onFavouriteChange($event)"></star>
         <input type="text" autoGrow  [(ngModel)]="title"/>
@@ -20,11 +23,11 @@ import { StarComponent } from './star.component';
         <div (click)="onDivClick($event)">
             <button class="btn btn-primary" [style.color]="isActive ? 'white' : 'gray'" (click)="onClick($event)">Submit</button>     
         </div>        
-
-        
+        <voter [voteCount]="post.voteCount" [myVote]="post.myVote" (vote)="onVoteChange($event)"></voter>
+       
         `,
     providers: [CourseService],
-    directives: [AutoGrowDirective,StarComponent]
+    directives: [AutoGrowDirective, StarComponent, LikeComponent, VoterComponent]
 })
 
 export class CoursesComponent {
@@ -34,7 +37,14 @@ export class CoursesComponent {
     
     post = {
         title:"Title",
-        isFavourite: true
+        isFavourite: true,
+        likes: 10,
+        voteCount: 10,
+        myVote: 1
+    }
+
+    onVoteChange($event){
+        console.log($event);
     }
 
     onFavouriteChange($event){
