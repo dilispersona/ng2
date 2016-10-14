@@ -1,4 +1,4 @@
-System.register(['angular2/core', './courses.service', './auto-grow.directive'], function(exports_1, context_1) {
+System.register(['angular2/core', './courses.service', './auto-grow.directive', './star.component'], function(exports_1, context_1) {
     'use strict';
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './courses.service', './auto-grow.directive'],
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, courses_service_1, auto_grow_directive_1;
+    var core_1, courses_service_1, auto_grow_directive_1, star_component_1;
     var CoursesComponent;
     return {
         setters:[
@@ -22,15 +22,25 @@ System.register(['angular2/core', './courses.service', './auto-grow.directive'],
             },
             function (auto_grow_directive_1_1) {
                 auto_grow_directive_1 = auto_grow_directive_1_1;
+            },
+            function (star_component_1_1) {
+                star_component_1 = star_component_1_1;
             }],
         execute: function() {
             CoursesComponent = (function () {
                 function CoursesComponent(courseService) {
                     this.title = "title for ";
                     this.isActive = true;
+                    this.post = {
+                        title: "Title",
+                        isFavourite: true
+                    };
                     this.courses = courseService.getCourses();
                     // this.authors = authorService.getAuthors();
                 }
+                CoursesComponent.prototype.onFavouriteChange = function ($event) {
+                    console.log($event);
+                };
                 CoursesComponent.prototype.onClick = function ($event) {
                     console.log($event);
                     // $event.stopPropagation();
@@ -41,9 +51,9 @@ System.register(['angular2/core', './courses.service', './auto-grow.directive'],
                 CoursesComponent = __decorate([
                     core_1.Component({
                         selector: 'courses',
-                        template: "\n        <h2>Courses</h2>\n        {{title}}<br/>\n        <input type=\"text\" autoGrow  [(ngModel)]=\"title\"/>\n        <ul>\n            <li *ngFor=\"#course of courses\">\n                {{course}}\n            </li>\n        </ul>  \n        <div (click)=\"onDivClick($event)\">\n            <button class=\"btn btn-primary\" [style.color]=\"isActive ? 'white' : 'gray'\" (click)=\"onClick($event)\">Submit</button>     \n        </div>\n        ",
+                        template: "\n        <h2>Courses</h2>\n        {{title}}<br/>\n        <star [isFavourite]=\"post.isFavourite\" (change)=\"onFavouriteChange($event)\"></star>\n        <input type=\"text\" autoGrow  [(ngModel)]=\"title\"/>\n        <ul>\n            <li *ngFor=\"#course of courses\">\n                {{course}}                \n            </li>\n        </ul>  \n        <div (click)=\"onDivClick($event)\">\n            <button class=\"btn btn-primary\" [style.color]=\"isActive ? 'white' : 'gray'\" (click)=\"onClick($event)\">Submit</button>     \n        </div>        \n\n        \n        ",
                         providers: [courses_service_1.CourseService],
-                        directives: [auto_grow_directive_1.AutoGrowDirective]
+                        directives: [auto_grow_directive_1.AutoGrowDirective, star_component_1.StarComponent]
                     }), 
                     __metadata('design:paramtypes', [courses_service_1.CourseService])
                 ], CoursesComponent);

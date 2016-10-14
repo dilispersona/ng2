@@ -3,30 +3,43 @@
 import { Component } from 'angular2/core';
 import { CourseService } from './courses.service';
 import { AutoGrowDirective } from './auto-grow.directive';
+import { StarComponent } from './star.component';
 
 @Component({
     selector: 'courses',
     template: `
         <h2>Courses</h2>
         {{title}}<br/>
+        <star [isFavourite]="post.isFavourite" (change)="onFavouriteChange($event)"></star>
         <input type="text" autoGrow  [(ngModel)]="title"/>
         <ul>
             <li *ngFor="#course of courses">
-                {{course}}
+                {{course}}                
             </li>
         </ul>  
         <div (click)="onDivClick($event)">
             <button class="btn btn-primary" [style.color]="isActive ? 'white' : 'gray'" (click)="onClick($event)">Submit</button>     
-        </div>
+        </div>        
+
+        
         `,
     providers: [CourseService],
-    directives: [AutoGrowDirective]
+    directives: [AutoGrowDirective,StarComponent]
 })
 
 export class CoursesComponent {
     title = "title for ";
     courses;
-    isActive = true;
+    isActive = true;   
+    
+    post = {
+        title:"Title",
+        isFavourite: true
+    }
+
+    onFavouriteChange($event){
+        console.log($event);
+    }
 
     onClick($event){
         console.log($event);
