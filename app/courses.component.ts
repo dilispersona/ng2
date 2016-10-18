@@ -6,6 +6,8 @@ import { AutoGrowDirective } from './auto-grow.directive';
 import { StarComponent } from './star.component';
 import { LikeComponent } from './like.component';
 import { VoterComponent } from './voter.component';
+import { BootstrapPanelComponent } from './bootstrap.panel.component';
+import { ElvisComponent } from './elvis.component';
 
 
 @Component({
@@ -24,14 +26,18 @@ import { VoterComponent } from './voter.component';
             <button class="btn btn-primary" [style.color]="isActive ? 'white' : 'gray'" (click)="onClick($event)">Submit</button>     
         </div>        
         <voter [voteCount]="post.voteCount" [myVote]="post.myVote" (vote)="onVoteChange($event)"></voter>
-       
+           <bs-panel>
+               {{title}}
+           </bs-panel>
+
+           <elvis></elvis>
         `,
     providers: [CourseService],
-    directives: [AutoGrowDirective, StarComponent, LikeComponent, VoterComponent]
+    directives: [AutoGrowDirective, StarComponent, LikeComponent, VoterComponent, BootstrapPanelComponent, ElvisComponent ]
 })
 
 export class CoursesComponent {
-    title = "title for ";
+    title = "This is the body";
     courses;
     isActive = true;   
     
@@ -42,6 +48,8 @@ export class CoursesComponent {
         voteCount: 10,
         myVote: 1
     }
+
+
 
     onVoteChange($event){
         console.log($event);

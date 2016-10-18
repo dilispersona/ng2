@@ -24,12 +24,21 @@ System.register(['angular2/core', './authors.service'], function(exports_1, cont
             AuthorComponent = (function () {
                 function AuthorComponent(authorService) {
                     this.title = "title for the authors goes here";
+                    this.courses = [];
+                    this.viewMode = 'map';
+                    this.books = {
+                        title: "Angular2 for beginners",
+                        pages: 500123123,
+                        enrolled: 298930,
+                        rating: 3.03434,
+                        price: 123
+                    };
                     this.authors = authorService.getAuthors();
                 }
                 AuthorComponent = __decorate([
                     core_1.Component({
                         selector: 'authors',
-                        template: "<h2>Authors</h2>\n        {{ title }}\n        <ul>\n            <li *ngFor=\"#author of authors\">\n                {{ author }}\n            </li>\n        </ul>\n        ",
+                        template: "<h2>Authors</h2>\n        {{ title }}        \n        <ul> \n            <li *ngFor=\"#author of authors\">\n                {{ author }}\n            </li>\n        </ul>   \n        <div *ngIf=\"courses.length > 0\">\n            List of courses here\n        </div>\n        <div *ngIf=\"courses.length == 0\">\n           You dont have any courses\n        </div>     \n        <ul class=\"nav nav-pills\">\n            <li><a (click)=\"viewMode = 'map'\">Map View </a></li>\n            <li><a (click)=\"viewMode = 'list'\"> List view</a></li>\n        </ul>\n        <div [ngSwitch]=\"viewMode\">\n            <template [ngSwitchWhen]=\"'map'\">Map view contents </template>\n            <template [ngSwitchWhen]=\"'list'\">List view contents</template>\n        </div>\n        <br/>\n        {{ books.title | uppercase}}\n        <br/>\n        {{ books.pages | number}}\n        <br/>\n        {{ books.enrolled | number: '2.2-2'}}\n        <br/>\n        {{ books.rating | number: '2.2-2'}}\n        <br/>\n        {{ books.price | currency: 'AUD': 'true'}}\n          <br/>\n        {{ books | json}}\n\n        ",
                         providers: [authors_service_1.AuthorService]
                     }), 
                     __metadata('design:paramtypes', [authors_service_1.AuthorService])
