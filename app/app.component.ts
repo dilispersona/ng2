@@ -4,7 +4,7 @@ import { AuthorComponent } from './authors.component';
 import { TweetsComponent } from './tweets.component';
 import { ZippyComponent } from './zippy.component';
 import { ContactFormComponent } from './contact-form.component';
-
+import { SignUpFormComponent } from './signup-form.component';
 @Component({
     selector: 'my-app',
     template: `<h1>Hello Angular 2</h1>
@@ -21,8 +21,11 @@ import { ContactFormComponent } from './contact-form.component';
         </zippy>
         <br/>
         <contact-form></contact-form>
+        <div [style.margin]="100"></div>
+        <signup-form></signup-form>
         `,
-    directives: [CoursesComponent,AuthorComponent,TweetsComponent, ZippyComponent, ContactFormComponent]
+    directives: [CoursesComponent,AuthorComponent,TweetsComponent,
+                 ZippyComponent, ContactFormComponent, SignUpFormComponent]
 })
 export class AppComponent {
    
