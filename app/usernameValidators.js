@@ -15,6 +15,18 @@ System.register([], function(exports_1, context_1) {
                     else
                         return null;
                 };
+                UsernameValidators.shouldBeUnique = function (control) {
+                    return new Promise(function (resolve, reject) {
+                        setTimeout(function () {
+                            if (control.value == 'dilip') {
+                                resolve({ shouldBeUnique: true });
+                            }
+                            else {
+                                resolve(null);
+                            }
+                        }, 1000);
+                    });
+                };
                 return UsernameValidators;
             }());
             exports_1("UsernameValidators", UsernameValidators);
