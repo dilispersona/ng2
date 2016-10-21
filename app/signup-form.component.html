@@ -8,10 +8,12 @@
             class="form-control"
             ngControl="username"
             #username="ngForm">
+            <div *ngIf="username.control.pending">Checking for uniqueness</div>
             <div *ngIf="username.touched && username.errors">
-                  <div class="alert alert-danger" *ngIf="username.errors.required">Username is required</div>
-            <div class="alert alert-danger" *ngIf="username.errors.cannotContainSpace">Username cannot contain space</div>
-            <div class="alert alert-danger" *ngIf="username.errors.shouldBeUnique">This name is already taken</div>
+                <div class="alert alert-danger" *ngIf="username.errors.invalidLogin">USername and password doesnot match</div>
+                <div class="alert alert-danger" *ngIf="username.errors.required">Username is required</div>
+                <div class="alert alert-danger" *ngIf="username.errors.cannotContainSpace">Username cannot contain space</div>
+                <div class="alert alert-danger" *ngIf="username.errors.shouldBeUnique">This name is already taken</div>
             </div>
           
     </div>
